@@ -30,12 +30,9 @@ for row in rows:
 
     pdfkit.from_string(body, f'out/{author}_{date}.pdf')
 
-#
-# pdfs = [file for file in os.listdir('out') if file.endswith('pdf')]
-#
+# Merge cover with pdf
 
-
-for row in rows[1:]:
+for row in rows:
     author, title, date, filename = row
 
     merger = PdfFileMerger()
@@ -49,9 +46,3 @@ for row in rows[1:]:
         merger.append(open(doc, 'rb'))
     with open(f'merged/{filename}', 'wb') as f:
         merger.write(f)
-
-# for pdf in pdfs:
-#     merger.append(open(pdf, 'rb'))
-#
-# with open('result.pdf', 'wb') as fout:
-#     merger.write(fout)
